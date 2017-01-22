@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+        <entity class="Models.Product">
+                <table name="product" schema="" catalog="my_scheme"/>
+                <attributes>
+                        <id name="productId">
+                                <column name="productID"/>
+                        </id>
+                        <basic name="productName">
+                                <column name="productName"/>
+                        </basic>
+                        <basic name="productPrice">
+                                <column name="productPrice"/>
+                        </basic>
+                        <basic name="productCategory">
+                                <column name="productCategory"/>
+                        </basic>
+                        <basic name="productQuantity">
+                                <column name="productQuantity"/>
+                        </basic>
+                </attributes>
+        </entity>
+</entity-mappings>
