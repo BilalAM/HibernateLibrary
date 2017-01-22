@@ -30,7 +30,7 @@ public abstract class DataAccessor<T> implements IDataAccesser<T> {
     @Override
     public void add(T entity) {
 
-        try (Session session = sessionFactoryBuilder.getCurrentSession()) {
+        try (Session session = sessionFactoryBuilder.openSession()) {
 
             session.getTransaction().begin();
 
@@ -44,7 +44,7 @@ public abstract class DataAccessor<T> implements IDataAccesser<T> {
 
     @Override
     public void addRange(T[] entites) {
-        try (Session session = sessionFactoryBuilder.getCurrentSession()) {
+        try (Session session = sessionFactoryBuilder.openSession()) {
             session.getTransaction().begin();
             for (T entity : entites) {
                 session.persist(entity);
@@ -95,7 +95,7 @@ public abstract class DataAccessor<T> implements IDataAccesser<T> {
     @Override
     public void delete(Integer ID) {
         T entityToDelete = getOne(ID);
-        try (Session session = sessionFactoryBuilder.getCurrentSession()) {
+        try (Session session = sessionFactoryBuilder.openSession()) {
             if (ID == null) {
                 throw new NullPointerException("null");
             } else if (ID < 0) {
