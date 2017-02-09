@@ -16,8 +16,10 @@ import java.util.List;
  */
 public class ProductDataAccess extends DataAccessor<Product> {
 
-
+    
+    // will remove once the sortBy() of DataAccess is complete , until then keep it commented !
     // filter by category
+    /*
     public List<Product> filterByCategory(String category){
         List<Product> innerProducts = new ArrayList<>();
         try {
@@ -39,6 +41,7 @@ public class ProductDataAccess extends DataAccessor<Product> {
         }
         return innerProducts;
     }
+    */
 
 
     //Hibernate: select avg(product0_.productPrice) as col_0_0_ from Product product0_
