@@ -112,6 +112,40 @@ public abstract class DataAccessor<T> implements IDataAccesser<T> {
         }
 
     }
+    
+    
+    @SuppressWarnings("unchecked")
+	@Override
+	public List<T> sortBy(String categoryAttribute) {
+		
+		// Product_.(attribute) -- > category param --> Product
+		// Employee_.(attribute) --> category param --> Employee
+		// Customer_.(attribute) --> category param
+		
+		String className = entityClass.getSimpleName()+"_."+categoryAttribute;
+		
+	// ^ above not working , must correct it 
+		
+		
+		List<T> innerSorted = new ArrayList<>();
+		try {
+			Session session = sessionFactoryBuilder.openSession();
+			session.getTransaction().begin();
+
+			CriteriaBuilder builder = session.getCriteriaBuilder();
+			CriteriaQuery<T> criteriaQuery = builder.createQuery(entityClass);
+			Root<T> root = criteriaQuery.from(entityClass);
+			criteriaQuery.select(root);
+			criteriaQuery.orderBy(builder.asc(root.get(className)));
+
+			innerSorted = session.createQuery(criteriaQuery).getResultList();
+			return innerSorted;
+
+		} catch (HibernateException hb) {
+			hb.printStackTrace();
+		}
+		return innerSorted;
+	}
 
 
 }
