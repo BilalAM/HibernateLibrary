@@ -16,34 +16,6 @@ import java.util.List;
  */
 public class ProductDataAccess extends DataAccessor<Product> {
 
-    
-    // will remove once the sortBy() of DataAccess is complete , until then keep it commented !
-    // filter by category
-    /*
-    public List<Product> filterByCategory(String category){
-        List<Product> innerProducts = new ArrayList<>();
-        try {
-            Session session = sessionFactoryBuilder.openSession();
-            session.getTransaction().begin();
-
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Product> criteriaQuery = builder.createQuery(Product.class);
-            Root<Product> root = criteriaQuery.from(Product.class);
-
-            criteriaQuery.select(root);
-            criteriaQuery.where(builder.equal(root.get(Product_.productCategory), category));
-
-            innerProducts = session.createQuery(criteriaQuery).getResultList();
-            return innerProducts;
-
-        }catch(HibernateException hb){
-            hb.printStackTrace();
-        }
-        return innerProducts;
-    }
-    */
-
-
     //Hibernate: select avg(product0_.productPrice) as col_0_0_ from Product product0_
 
     public Double getAverageStockPrice(){
