@@ -114,19 +114,9 @@ public abstract class DataAccessor<T> implements IDataAccesser<T> {
     }
     
     
-    @SuppressWarnings("unchecked")
+   @SuppressWarnings("unchecked")
 	@Override
-	public List<T> sortBy(String categoryAttribute) {
-		
-		// Product_.(attribute) -- > category param --> Product
-		// Employee_.(attribute) --> category param --> Employee
-		// Customer_.(attribute) --> category param
-		
-		String className = entityClass.getSimpleName()+"_."+categoryAttribute;
-		
-	// ^ above not working , must correct it 
-		
-		
+	public List<T> sortBy(String category) {
 		List<T> innerSorted = new ArrayList<>();
 		try {
 			Session session = sessionFactoryBuilder.openSession();
@@ -136,7 +126,7 @@ public abstract class DataAccessor<T> implements IDataAccesser<T> {
 			CriteriaQuery<T> criteriaQuery = builder.createQuery(entityClass);
 			Root<T> root = criteriaQuery.from(entityClass);
 			criteriaQuery.select(root);
-			criteriaQuery.orderBy(builder.asc(root.get(className)));
+			criteriaQuery.orderBy(builder.asc(root.get(category)));
 
 			innerSorted = session.createQuery(criteriaQuery).getResultList();
 			return innerSorted;
