@@ -126,6 +126,11 @@ public abstract class DataAccessor<T> implements IDataAccesser<T> {
 			CriteriaQuery<T> criteriaQuery = builder.createQuery(entityClass);
 			Root<T> root = criteriaQuery.from(entityClass);
 			criteriaQuery.select(root);
+			
+			// WARNING *************************************************
+			/*  category ATTRIBUTE MUST AND ONLY MUST (AND ONLY MUST!!!!) BE SAME AS DEFINED IN POJO CLASS !!!!!!
+			    Otherwise it will throw a NASTY AND VERY CONFUSING IllegalArgumentException (Hibernate issue) 
+			   */
 			criteriaQuery.orderBy(builder.asc(root.get(category)));
 
 			innerSorted = session.createQuery(criteriaQuery).getResultList();
