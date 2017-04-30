@@ -26,7 +26,12 @@
             <artifactId>hibernate-jpamodelgen</artifactId>
             <version>5.2.6.Final</version>
         </dependency>
-
+         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+         </dependency>
     </dependencies>
     
 </project>
